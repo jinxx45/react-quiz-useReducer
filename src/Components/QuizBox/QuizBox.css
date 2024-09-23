@@ -1,6 +1,25 @@
-.question-container {
+.questionbox-container {
   display: flex;
   height: 90vh;
   align-items: center;
   justify-content: center;
+}
+.question-with-points {
+  display: flex;
+  flex-direction: column;
+}
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.next-button {
+  background-color: #61dafb;
+  padding: 0.4rem 1.5rem;
+  border: none;
+  color: white;
+  font-weight: bolder;
+  cursor: pointer;
+  height: 50%;
 }
