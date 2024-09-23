@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  height: 40px;
+}
+
+.logo {
+  height: 2rem;
+  width: 2rem;
+}
+
+.header-text {
+  text-align: center;
+  font-size: 1.5rem;
+  color: black;
+  letter-spacing: 1px;
+}
