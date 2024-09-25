@@ -14,19 +14,19 @@ This is a simple quiz application built using React, designed to help developers
 
 ### 1. **Quiz Ready Screen**
 
-![Quiz Ready Screen](./assets/images/ScreenReady.png)
+![Quiz Ready Screen](./public/images/ScreenReady.png)
 
 This screen shows when the quiz data is loaded and ready to begin.
 
 ### 2. **Question Screen with Timer and Points**
 
-![Question Screen](./assets/images/MainScreen.png)
+![Question Screen](./public/images/MainScreen.png)
 
 The main quiz screen displays the question, current points, and remaining time.
 
 ### 3. **End Screen**
 
-![End Screen](./assets/images/EndScreen.png)
+![End Screen](./public/images/EndScreen.png)
 
 HAHA, The point is zero , cause for each incorrect answer , Im reducing the points by 5 :)
 
