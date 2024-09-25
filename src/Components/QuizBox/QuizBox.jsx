@@ -9,6 +9,7 @@ const initialState = {
   index: 0,
   points: 0,
   showNext: false,
+  timeRemaining: 600,
 };
 
 function reducer(currentState, action) {
@@ -49,6 +50,16 @@ function reducer(currentState, action) {
         index: currentState.index + 1,
         showNext: false,
       };
+    case "decrementTime":
+      return {
+        ...currentState,
+        timeRemaining: currentState.timeRemaining - 1,
+      };
+    case "timeUp":
+      return {
+        ...currentState,
+        status: "finished",
+      };
 
     default:
       throw new Error("Action unknown");
@@ -71,6 +82,26 @@ export default function QuizBox() {
     dispatch({ type: "nextClicked" });
   };
 
+  useEffect(() => {
+    if (state.status === "start" && state.timeRemaining > 0) {
+      //dispatching an event every one second to decrement timer
+      const timer = setInterval(() => {
+        dispatch({ type: "decrementTime" });
+      }, 1000);
+
+      // Clear the timer when the component is unmounted or when time runs out
+      return () => clearInterval(timer);
+    } else if (state.timeRemaining === 0) {
+      dispatch({ type: "timeUp" });
+    }
+  }, [state.status, state.timeRemaining]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  };
+
   return (
     <div className="questionbox-container inria-sans-light">
       {state.status === "loading" && <> Loading...</>}
@@ -88,7 +119,7 @@ export default function QuizBox() {
               />
               <div className="status-bar">
                 <h4>Points: {state.points}</h4>
-                <h4>Time</h4>
+                <h4>Time Remaining : {formatTime(state.timeRemaining)}</h4>
                 {state.showNext === true && (
                   <button onClick={handleNext} className="next-button">
                     Next
@@ -100,7 +131,12 @@ export default function QuizBox() {
             <div className="end-screen">
               <h2>Quiz Completed!</h2>
               <h4>Your Total Points: {state.points}</h4>
-              {/* You can add more content here, like a restart button or review answers */}
+            </div>
+          )}
+          {state.status === "finished" && (
+            <div className="end-screen">
+              <h2>Time's Up!</h2>
+              <h4>Your Total Points: {state.points}</h4>
             </div>
           )}
         </div>
